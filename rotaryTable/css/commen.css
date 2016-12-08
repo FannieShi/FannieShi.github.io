@@ -1,0 +1,81 @@
+html,body{
+	-webkit-text-size-adjust:none; /*禁止文字自动调整大小，解决chrome浏览器下字体不能小于12px*/
+	-webkit-touch-callout:none;    /*去除长按a链接弹框*/
+	/*-webkit-user-select: none;*/ /*禁止页面文字选择*/
+}
+body{
+	overflow-x: hidden; 
+	font-size: .26rem;
+	color:#333; 
+	font-family:Verdana, Arial, Helvetica, "微软雅黑", sans-serif;
+}
+/*margin、padding*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}                                    
+html{zoom:1;}
+html *{outline:0;zoom:1;} 
+html button::-moz-focus-inner{border-color:transparent!important;} 
+/*表格边框合并，边框距零*/
+table{border-collapse:collapse;border-spacing:0;} 
+/*去除webkit内核点击高亮效果*/
+a,button,input,select,img,label{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color:transparent;
+}
+/*去掉苹果的默认UI来渲染按钮 、解决部分手机浏览器对border：none无效办法*/
+input[type="submit"],input[type="reset"],input[type="button"],input[type=date],button,select{
+	appearance:none;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari Chrome */
+}
+/*placeholder文本颜色*/
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+	color: #adadad;
+}
+input:-moz-placeholder,textarea:-moz-placeholder {
+	color: #adadad;
+}
+/*html5标签*/
+header,footer,section,article,aside,nav,figure{display: block;}
+/*去除默认样式*/
+h1,h2,h3,h4,h5,h6,address,caption,cite,code,dfn,em,th,var,i{font-style:normal;font-weight:normal;font-size:100%;}
+ul,li,ol{list-style:none;}
+fieldset,a,img{border:0;} 
+a{outline:none; text-decoration:none; color: inherit;}a:hover{ text-decoration:none;}
+q:before,q:after{content:'';}
+/*字体继承*/
+input,select,textarea,button{font-family:inherit;}
+/*弹窗*/
+.m-pop {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	width: 80%;
+	padding: .4rem 0;
+	border: 1px solid #ff7e00;
+	border-radius: .05rem;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+	text-align: center;
+	background: #fff;
+}
+.m-pop h4 {
+	font-size: .45rem;
+	line-height: 2;
+}
+.m-pop p {
+	margin-bottom: .3rem;
+	font-size: .32rem;
+	line-height: 2;
+}
+.m-btnB {
+	text-align: center;
+}
+.m-btnB .m-btn {
+	display: inline-block;
+	padding: .2rem .6rem;
+	color: #fff;
+	font-size: .36rem;
+	font-weight: 600;
+	background: #ff7e00; 
+}
