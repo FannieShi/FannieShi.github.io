@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>禁止输入</title>
+</head>
+<body>
+	<p>通过表单元素的特殊属性来控制输入</p>
+	<input type="text" value="没禁止输入" />
+	<br />
+	<input type="text" value="禁止输入" disabled />
+	<br />
+	<input type="text" value="禁止输入" disabled="disabled" />
+	<br />
+	<input type="text" value="禁止输入 可以选择" readonly />
+	<br />
+	<input type="text" value="禁止输入 可以选择" readonly="readonly" />
+	<br />
+	<p>通过JavaScript控制输入的方式</p>
+	<input type="text" value="禁止输入" id="input" />
+	
+<script type="text/javascript">
+	var _input = document.getElementById('input');
+	
+	//失去焦点
+	_input.onfocus = function(){   
+		_input.blur();
+	}
+	
+	//清空文本框，有一定缺陷
+//	_input.onkeyup = _input.onblur = _input.onfocus = noText;
+//	function noText(){
+//		_input.value = '';
+//	}
+</script>
+</body>
+</html>

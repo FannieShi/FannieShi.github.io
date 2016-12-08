@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>关闭输入法</title>
+<style type="text/css">
+	.ime-disabled {ime-mode: disabled;}
+</style>
+</head>
+<body>
+	<p>关闭表单元素中的输入法是很常见的需求，比如输入E-mail、网址时用的都是英文字母，此时关闭输入法可以防止用户输入错误。</p>
+	<br />
+	<p>植入CSS特殊属性，不支持Chorme浏览器</p>
+	<input type="text" class="ime-disabled" value="不支持谷歌浏览器,css3控制" />
+	<br />
+	<input type="text" id="inputMethod" value="不支持谷歌浏览器,js控制style"/>
+<script type="text/javascript">
+	var _inputMethod = document.getElementById('inputMethod');
+	inputMethod(_inputMethod);
+	
+	function inputMethod(ele){
+		var _this = this,
+		    _arr = ele;
+		if(!(ele instanceof Array)){
+			_arr = [ele];
+		}
+		for(var i=0, arrLen = _arr.length; i<arrLen; i++){
+			_arr[i].onfocus = function(){
+				//样式方案，只兼容除chorme浏览器之外的浏览器
+				_arr[i].style.imeMode = 'disabled';
+			}
+		}
+		
+	}
+</script>
+</body>
+</html>
