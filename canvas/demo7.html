@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="400">
+		您的浏览器不支持canvas!
+	</canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById('myCanvas');
+		if(canvas.getContext){
+			var ctx = canvas.getContext('2d');
+		}
+		ctx.beginPath();
+		ctx.shadowOffsetX = 5;
+		ctx.shadowOffsetY = 5;
+		ctx.shadowBlur = 5;
+		ctx.shadowColor = 'rgba(0,0,0,.2)';
+		ctx.fillStyle = '#f60';
+		ctx.fillRect(20,20,200,100);
+	</script>
+</body>
+</html>

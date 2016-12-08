@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas</title>
+</head>
+<body>
+	<canvas id="myCanvas" width="400" height="200">
+		您的浏览器不支持canvas!
+	</canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById('myCanvas');
+		if(canvas.getContext){
+			var ctx = canvas.getContext('2d');
+		}
+		ctx.beginPath(); //开始路径绘制
+		ctx.moveTo(20,20); //设置线段的起点
+		ctx.lineTo(20,100); //设置线段的终点
+		ctx.lineWidth = 1.0; //设置线宽
+		ctx.strokeStyle = '#000';  //设置线的颜色
+		ctx.stroke(); //进行线条的着色，此时线条才可见
+	</script>
+</body>
+</html>
