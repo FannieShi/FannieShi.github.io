@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>限制只能输入数字</title>
+</head>
+<body>
+	<form >
+		<input type="number" placeholder="HTML5只能输入数字" /> <br />
+		<input type="text" placeholder="pattern,不兼容safari" pattern="[0-9]+" title="只能输入数字！"/> <br />
+		<input type="text" id="input" placeholder="js只能输入数字" />
+		<button type="submit">提交</button>
+	</form>
+	
+<script type="text/javascript">
+	var _input = document.getElementById('input');
+	
+	_input.onfocus = function(){
+		onlyNumber(this);
+	}
+	_input.onblur = function(){
+		onlyNumber(this);
+	}
+	_input.onkeyup = function(){
+		onlyNumber(this);
+	}
+	
+	function onlyNumber(_this){
+		_this.value = _this.value.replace(/\D/g,'');
+	}
+</script>
+</body>
+</html>

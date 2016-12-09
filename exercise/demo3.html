@@ -18,9 +18,12 @@
 	<br />
 	<p>通过JavaScript控制输入的方式</p>
 	<input type="text" value="禁止输入" id="input" />
+	<br />
+	<input type="text" value="禁止输入" id="input2" />
 	
 <script type="text/javascript">
 	var _input = document.getElementById('input');
+	var _input2 = document.getElementById('input2');
 	
 	//失去焦点
 	_input.onfocus = function(){   
@@ -28,10 +31,10 @@
 	}
 	
 	//清空文本框，有一定缺陷
-//	_input.onkeyup = _input.onblur = _input.onfocus = noText;
-//	function noText(){
-//		_input.value = '';
-//	}
+	_input2.onkeyup = _input2.onblur = _input2.onfocus = noText;
+	function noText(){
+		_input2.value = '';
+	}
 </script>
 </body>
 </html>
