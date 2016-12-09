@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>限制只能输入中文</title>
+</head>
+<body>
+	<input type="text" placeholder="只能输入中文" id="input"/>
+	
+<script type="text/javascript">
+	window.onload = function(){
+		var _input = document.getElementById('input');
+		_input.onfocus = function(){
+			onlyChinese(this);
+		}
+		_input.onblur = function(){
+			onlyChinese(this);
+		}
+		//不能绑定keyup事件，否则会出现还没有打完整的字就被清除
+		/*_input.onkeyup = function(){
+			onlyChinese(this);
+		}*/
+		function onlyChinese(_this){
+			_this.value = _this.value.replace(/[^\u4e00-\u9fa5]/g,'');
+		}
+	}
+</script>
+</body>
+</html>
