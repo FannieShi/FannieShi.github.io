@@ -57,11 +57,11 @@
 			}
 		}
 		
-		var strLen = function(_str,_model){
+		var strLen = function(_str,_model){                                                                                                      
 			//逻辑，当匹配到中文且模式为Ch时，中文计2。
-			var trim = function(chars){
+			/*var trim = function(chars){
 				return chars.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'');
-			}
+			}*/
 			_str = trim(_str),
 			_model = _model||"Ch";
 			var _strLen = _str.length;
@@ -71,8 +71,9 @@
 				var chinese = _str.match(/[\u4e00-\u9fa5]/g);
 				return _strLen + (chinese && _model=="Ch" ? chinese.length : 0);
 			}
-			
-			
+			function trim(chars){
+				return chars.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'');
+			}	
 		}
 	}
 </script>
