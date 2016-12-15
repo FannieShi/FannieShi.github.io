@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>限制字符串长度</title>
+</head>
+<body>
+	<!--中英文字符统一计算，没有区分-->
+	通过max-length限制：<input type="text" maxlength="5" placeholder="限制长度5" /><br />
+	通过js限制，并兼容：<input type="text" id="input" limit-length="5" placeholder="限制长度5" />
+	
+<script type="text/javascript">
+
+	window.onload = function(){
+		var _input = document.getElementById('input');
+		
+		_input.onfocus = function(){
+			countNumber(_input);
+		}
+		_input.onkeydown = function(){
+			countNumber(_input);
+		}
+		_input.onblur = function(){
+			countNumber(_input);
+		}
+		function countNumber(_this){
+			var val = _this.value,
+				len = val.length,
+				limit = _this.getAttribute('limit-length');
+			if(len >　limit) {
+				_this.value = val.substr(0,limit);
+			}
+		}
+	}
+</script>
+</body>
+</html>

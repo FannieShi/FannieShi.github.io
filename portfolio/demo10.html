@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>实时提示可输入字符（区分中英文）</title>
+</head>
+<body>
+	<h2>实现显示还可以输入多少字符（区分中英文）</h2>
+	<input type="text" data-length="10" data-model="Ch" id="input" />
+	<p>测试一：还可以输入<span class="remainBox" id="remainBox1">10</span>字符</p>
+	<p>测试二：还可以输入<span class="remainBox" id="remainBox2">10</span>字符</p>
+	
+<script type="text/javascript">
+	window.onload = function(){
+		
+		var _input = document.getElementById('input'),
+		    _remainBox1 = document.getElementById('remainBox1'),
+		    _remainBox2 = document.getElementById('remainBox2'),
+		    box = [_remainBox1,_remainBox2];
+		
+		_input.onkeyup = function(){
+			countNum(this, box);
+		}
+		_input.onfocus = function(){
+			countNum(this, box);
+		}
+		_input.onblur = function(){
+			countNum(this, box);
+		}
+		_input.onkeydown = function(){
+			countNum(this, box);
+		}
+		
+		var countNum = function(_this, box){
+			var _val = _this.value,
+			    _vLen = _val.length,
+			    _dataLen = _this.getAttribute('data-length'),
+			    _model = _this.getAttribute('data-model'),
+			    subLen;
+			
+			if(_vLen > _dataLen){
+				_this.value = _val.substr(0,_dataLen);
+			}
+			if(_model == "Ch"){
+				_vLen = strLen(_val,_model);
+				var _vv = _val.match(/[\u4e00-\u9fa5]/g);
+				subLen = _dataLen - (_vv ? _vv.length : 0);
+			}
+			if(_vLen > _dataLen){
+				_this.value = _val.substr(0,subLen);
+			}
+			if(box){
+				for(var i=0,boxLen=box.length; i<boxLen; i++){
+					console.log(boxLen);
+					box[i].innerHTML = _dataLen - _vLen;
+				}
+			}
+		}
+		
+		var strLen = function(_str,_model){                                                                                                      
+			//逻辑，当匹配到中文且模式为Ch时，中文计2。
+			/*var trim = function(chars){
+				return chars.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'');
+			}*/
+			_str = trim(_str),
+			_model = _model||"Ch";
+			var _strLen = _str.length;
+			if(_strLen == 0){
+				return 0;
+			}else{
+				var chinese = _str.match(/[\u4e00-\u9fa5]/g);
+				return _strLen + (chinese && _model=="Ch" ? chinese.length : 0);
+			}
+			function trim(chars){
+				return chars.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'');
+			}	
+		}
+	}
+</script>
+</body>
+</html>
