@@ -8,21 +8,8 @@
 </head>
 <body>
 	<div class="container">
-		<ul class="catalog">
-			<li>
-				<h1>第一章 表单常用代码</h1>
-				<dl class="sub-catalog">
-					<dd><a href="form/demo1.html" target="_blank" title="去除字符串两边的空格">去除字符串两边的空格</a></dd>
-					<dd><a href="form/demo2.html" target="_blank" title="验证用户是否输入">验证用户是否输入</a></dd>
-				</dl>
-			</li>
-			<li>
-				<h1>第二章 图片常用相关代码</h1>
-				<dl class="sub-catalog">
-					<dd><a href="form/demo1.html" target="_blank" title="去除字符串两边的空格">可添加的下拉选项</a></dd>
-					<dd><a href="form/demo2.html" target="_blank" title="验证用户是否输入">图片放大镜效果</a></dd>
-				</dl>
-			</li>
+		<ul class="catalog" id="catalog">
+			
 		</ul>
 	</div>
 	
@@ -48,6 +35,27 @@
 			{ url: 'form/16.html' , title: '自动选定文本内容'}
 		]
 	]
+	
+	var str = '';
+	for(var i=0; i<data.length; i++){
+		var items = data[i],
+			liStr = '';
+		for(var j=0; j<items.length; j++){
+			var catalog = items[j];
+			if(j == 0){
+				liStr += '<li><h1>' + catalog.title + '</h1><dl class="sub-catalog">';
+			}else {
+				liStr += '<dd><a href="' + catalog.url + '" target="_blank" title=" ' + catalog.title + '"> '+ catalog.title + '</a></dd>';
+			}
+			if(j == items.length -1){
+				liStr += '</dl></li>';
+			}
+		}
+		str += liStr;
+	}
+	
+	var box = document.getElementById('catalog');
+	box.innerHTML = str;
 </script>
 </body>
 </html>
