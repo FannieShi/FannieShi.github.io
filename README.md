@@ -1,5 +1,5 @@
-# Javascript-coding
-My javascript coding
+# fannieshi.github.io
+My Front-End coding
 
 Preview online: 
-https://fannieshi.github.io/Javascript-coding/
+https://fannieshi.github.io/
