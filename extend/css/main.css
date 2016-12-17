@@ -1,3 +1,4 @@
+*{ margin:0; padding:0;}
 .container {
 	width: 500px;
 	margin: 20px auto;
@@ -8,34 +9,51 @@
 	border: 1px solid #eee;
 	border-radius: 5px;
 	box-shadow: 2px 2px 3px #ececec;
+	list-style: none;
 }
 .catalog li {
 	border-bottom: 1px solid #f2f2f2;
 	line-height: 40px;
+}
+.catalog li:last-child {
+	border-bottom: none;
 }
 .catalog h1 {
 	font-size:20px; 
 	font-family: '微软雅黑';
 	cursor: pointer;
 	color: #0a8cd2;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	transition: all .5s ease;
 }
 .catalog h1:hover {
 	padding-left: 20px;	
 	text-shadow: 1px 1px 2px rgba(0,0,0,.1);
-	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	transition: all 1s ease;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	transition: all .5s ease;
 }
 .sub-catalog {
+	display: none;
 	padding-left: 20px;
 	font-size: 17px;
 }
+.sub-catalog a {
+	font-family: "微软雅黑";
+	color: #0a8cd2;
+	text-decoration: none;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	transition: all .5s ease;
+}
 .sub-catalog a:hover {
+	color: #f60;
 	padding-left: 20px;
 	color: #0a8cd2;	
 	text-decoration: none;
 	text-shadow: 1px 1px 2px rgba(0,0,0,.1);
-	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	transition: all 1s ease;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	transition: all .5s ease;
 }
