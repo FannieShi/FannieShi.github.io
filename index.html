@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>前端作品集</title>
-<link rel="stylesheet" type="text/css" href="extend/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="extend/css/main.css"/>
 </head>
 <body>
@@ -56,6 +55,26 @@
 	
 	var box = document.getElementById('catalog');
 	box.innerHTML = str;
+	
+	var h1 = document.getElementsByTagName('h1'),
+		dl = document.getElementsByTagName('dl'),
+		open = false;
+		
+	for(var i=0; i<h1.length; i++){
+		h1[i].index = i;
+		h1[i].onclick = function(){
+			for(var i=0; i< dl.length; i++){
+				dl[i].style.display = 'none';
+			}
+			if(open){
+				dl[this.index].style.display = 'none'
+				open = false;
+			}else{
+				dl[this.index].style.display = 'block'
+				open = true;
+			}
+		}
+	}
 </script>
 </body>
 </html>
