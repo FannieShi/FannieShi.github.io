@@ -3,21 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <title>验证用户是否输入</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<style type="text/css">
+.container {
+	padding: 80px 0;
+	text-align: center;
+}
+.input {
+	padding: 5px;
+	margin-right: 10px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+}
+</style>
 </head>
 <body>
-	<input type="text" name="" id="name" value="请输入" />
-	<button type="button" id="isContent">验证是否为空</button>
-	
+<div class="container">
+	<input id='input' class="input" type="text" placeholder="请输入" />
+	<button id="btn" class="btn btn-primary">验证</button>
+</div>	
 <script type="text/javascript">
 	window.onload = function(){
-		var _name = document.getElementById('name'),
-		    _isContent = document.getElementById('isContent');
-		
-		_isContent.onclick = function(){
-			if(_name.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'')){
+		var input = document.getElementById('input'),
+			btn = document.getElementById('btn');
+		btn.onclick = function(){
+			if(input.value.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'')){
 				alert('您的输入不为空！');
 			}else{
-				alert('您的输入为空');
+				alert('您的输入为空！');
 			}
 		}
 	}
