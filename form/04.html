@@ -3,58 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>关闭输入法</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 <style type="text/css">
 	.ime-disabled {ime-mode: disabled;}
 </style>
 </head>
 <body>
-	<p>关闭表单元素中的输入法是很常见的需求，比如输入E-mail、网址时用的都是英文字母，此时关闭输入法可以防止用户输入错误。</p>
-	<br />
-	<p>1.植入CSS特殊属性，不支持Chorme浏览器</p>
-	<input type="text" class="ime-disabled" value="不支持chorme" /> css3操作
-	<br />
-	<input type="text" id="inputMethod" value="不支持chorme"/>      js操作
-	<br />
-	<p>2.事件文本过滤,兼容Chorme浏览器</p>
-	<input type="text" id="input" class="ime-disabled" value="兼容Chorme" />	
+<div class="box1">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="user" class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control ime-disabled" id="user" placeholder="用户名" />
+			</div>
+		</div>
+	</form>
+</div>	
 <script type="text/javascript">
-	//不支持Chorme
-	var _inputMethod = document.getElementById('inputMethod');
-	inputMethod(_inputMethod);
-	
-	function inputMethod(ele){		
-		var _this = this,
-		    _arr = ele;
-		    
-		if(!(ele instanceof Array)){
-			_arr = [ele];
-		}
-		for(var i=0, arrLen = _arr.length; i<arrLen; i++){
-			_arr[i].onfocus = function(){
-				//样式方案，只兼容除chorme浏览器之外的浏览器
-				this.style.imeMode = 'disabled';
+	(function(){
+		var input = document.getElementsByTagName('input');
+		for(var i=0; i<input.length; i++){
+			if(input[i].style.imeMode == undefined){
+				input[i].onkeyup = input[i].onblur = function(){
+					clear(this);
+				}
 			}
 		}
-	}
-	
-	//兼容Chorme浏览器,检测是某有ime-mode属性。
-	var _input = document.getElementById('input');
-	var isImeMode = _input.style.imeMode;
-	if(!isImeMode){
-		_input.onfocus = function(){
-			clearChinese(this);
-		};
-		_input.onblur = function(){
-			clearChinese(this);
-		};
-		_input.onkeyup = function(){
-			clearChinese(this);
-		};
-	}
-	
-	function clearChinese(_this){
-		_this.value = _this.value.replace(/[\u4e00-\u9fa5]/g,'');
-	}
+		function clear(o){
+			o.value = o.value.replace(/[\u4e00-\u9fa5]/g,'');
+		}
+	})();
 </script>
 </body>
 </html>
