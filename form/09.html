@@ -7,11 +7,11 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 <style type="text/css">
-	.num p {
+	.tips p {
 		line-height: 50px;
 		text-align: left;
 	}
-	.num .red {
+	.tips .red {
 		margin: 0 5px;
 		font-family: Constantia, Georgia;
 		font-style: italic;
@@ -25,55 +25,38 @@
 	<form class="form-horizontal">
 		<div class="form-group">
 			<div class="col-sm-10">
-				<textarea class="form-control" rows="8" placeholder="请输入..."></textarea>
-				<div class="num">
-					<p>还可以输入<i class="red">140</i>个字</p>
+				<textarea class="form-control" rows="8" maxlength="140" placeholder="请输入..."></textarea>
+				<div class="tips">
+					<p>还可以输入<i class="red" id="num">140</i>个字</p>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-10">
-				<button class="btn btn-primary btn-block">提　交</button>
+				<button type="button" class="btn btn-primary btn-block">提　交</button>
 			</div>
 		</div>
 	</form>
 </div>
-
-
 <script type="text/javascript">
-	window.onload = function(){
-		var _input = document.getElementById('input');
-		
-		_input.onfocus = function(){
-			countNum(this);
+	(function(){
+		var form = document.getElementsByTagName('form')[0];
+		var textarea = form.getElementsByTagName('textarea')[0];
+		var num = document.getElementById('num');
+		textarea.oninput = textarea.onpropertychange = function(){
+			num.innerHTML = count(this);
 		}
-		_input.onblur = function(){
-			countNum(this);
-		}
-		_input.onkeyup = function(){
-			countNum(this);
-		}
-		
-		var	countNum = function(_this){
-				var _val = _this.value,
-					_vLen = _val.length,
-					dataLength = _this.getAttribute('data-length'),
-					dataModel = _this.getAttribute('data-model'),
-					subLen;
-				
-				if(_vLen>dataLength){
-					_this.value = _val.substr(0,dataLength);
-				}
-				if(dataModel == "Ch"){
-					_vLen = strLen(_val,dataModel);
-					var vv = _val.match(/[\u4e00-\u9fa5]/g);
-					subLen = dataLength - (vv ? vv.length: 0);
-				}
-				if(_vLen>dataLength){
-					_this.value = _val.substr(0,subLen);
-				}
+		function count(obj){
+			var m = obj.getAttribute('maxlength') ? obj.getAttribute('maxlength') : 140,
+				l = obj.value.length;
+			if(l < m){
+				return m-l;
+			}else {
+				obj.value = obj.value.substr(0,140);
+				return 0;
 			}
-	}
+		}
+	})();
 </script>
 </body>
 </html>
