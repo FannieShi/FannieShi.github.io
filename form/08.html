@@ -6,6 +6,33 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.popover {
+		left: 100%;
+		width: 200px;
+		line-height: 95%;
+		color: #f00;
+	}
+	.popover .arrow {
+		position: absolute;
+		left: -10px;
+		top: 50%;
+		margin-top: -8px;
+		border-right: 10px solid rgba(0,0,0,.2);
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+	}
+	.popover .arrow::after {
+		content: '';
+		position: absolute;
+		left: 1px;
+		top: 50%;
+		margin-top: -7px;
+		border-right: 10px solid #fff;
+		border-top: 7px solid transparent;
+		border-bottom: 7px solid transparent;
+	}
+</style>
 </head>
 <body>
 <div class="box1">
@@ -13,41 +40,35 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">姓名</label>
 			<div class="col-sm-10">
-				<input type="text" id="name" class="col-sm-10 form-control" placeholder="姓名" />
-				<div class="popover right" style="display: block;">
-					最多只能输入4个字
+				<input type="text" id="name" class="col-sm-10 form-control" maxlength="4" placeholder="姓名" />
+				<div class="popover right">
+					<div class="popover-content">
+						<div>最多只能输入4个中文字</div>
+						<div class="arrow"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</form>
 </div>
-	<!--中英文字符统一计算，没有区分-->
-	通过max-length限制：<input type="text" maxlength="5" placeholder="限制长度5" /><br />
-	通过js限制，并兼容：<input type="text" id="input" limit-length="5" placeholder="限制长度5" />
 	
 <script type="text/javascript">
-
-	window.onload = function(){
-		var _input = document.getElementById('input');
-		
-		_input.onfocus = function(){
-			countNumber(_input);
+	(function(){
+		var $name = document.getElementById('name');
+		$name.onfocus = $name.onblur = function(){
+			check(this);
 		}
-		_input.onkeydown = function(){
-			countNumber(_input);
-		}
-		_input.onblur = function(){
-			countNumber(_input);
-		}
-		function countNumber(_this){
-			var val = _this.value,
-				len = val.length,
-				limit = _this.getAttribute('limit-length');
-			if(len >　limit) {
-				_this.value = val.substr(0,limit);
+		function check(obj){
+			var oVal = obj.value;
+			var maxLen = obj.getAttribute('maxlength');
+			if(oVal.match(/[^\u4e00-\u9fa5]/g)||oVal.length > maxLen){
+				obj.parentNode.getElementsByTagName('div')[0].style.display = 'block';
+			}else {
+				obj.parentNode.getElementsByTagName('div')[0].style.display = 'none';
 			}
 		}
-	}
+	})();
+	
 </script>
 </body>
 </html>
