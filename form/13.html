@@ -2,22 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>回车提交表单</title>
+<title>全选反选复选框</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 </head>
 <body>
-	<h2>回车提交表单</h2>
-	<input type="text" id="enterSubmit" value="回车提交"  />
+	
 	
 <script type="text/javascript">
-	window.onload = function(){
-		document.getElementById('enterSubmit').onkeyup = function(e){
-			var e = e || window.event;
-			var keycode = e.keyCode || e.which || e.charCode;
-			if(keycode == 13){
-				alert('回车提交成功！');
-			}
-		}
-	}
+	
 </script>
 </body>
 </html>

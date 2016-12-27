@@ -2,62 +2,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>文本框内容自动滚动</title>
+<title>文本进行敏感词过滤</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 </head>
 <body>
-	<h2>文本框中的文字自动滚动效果</h2>
-	<div id="rollBox" class="rollBox" data-width="100" data-height="100">
-		1111111111111
-		2222222222222
-		3333333333333
-		4444444444444
-		5555555555555
-	</div>
-
+<div class="box1">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="idea" class="col-sm-2 control-label">您的想法</label>
+			<div class="col-sm-10">
+				<textarea name="idea" id="idea" rows="8" class="col-sm-10 form-control" placeholder="政府|国民党|日本 将会被过滤"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="button" class="btn btn-primary btn-block" id="button">发　表</button>
+			</div>
+		</div>
+	</form>
+</div>
 <script type="text/javascript">
-	window.onload = function(){
-		var rollBox = document.getElementById('rollBox'),
-			_div = rollBox.innerHTML,
-			setCss = function(_this,cssOption){
-				//检测节点类型
-				if(!_this || _this.nodeType === 3 || _this.nodeType === 8 || !_this.style){
-					return ;
+	(function(){
+		var button = document.getElementById('button');
+		var textarea = document.getElementsByTagName('textarea')[0];
+		var key = /政府|国民党|日本/g;
+		button.onclick = function(){
+			textarea.value = textarea.value.replace(key, function(str){
+				var s = '';
+				for(var i=0,len=str.length; i<len; i++){
+					s += '*';
 				}
-				for(var cs in cssOption){    //遍历样式
-					_this.style[cs] = cssOption[cs];
-				}
-				return _this;
-			};
-		rollBox.innerHTML = "<div id='rollBox_roll'>"+ _div +"</div>";
-		setCss(rollBox,{
-			"position": "relative",
-			"overflow": "hidden",
-			"wordWrap": "break-word",
-			"wordBreak": "break-all",
-			"width": rollBox.getAttribute('data-width') + 'px',
-			"height": rollBox.getAttribute('data-height') + 'px'
-		});
-		var timeRoll = document.getElementById('rollBox_roll'),
-			_h = timeRoll.offsetHeight;     //获取对象的滚动高度
-			timeoutRoll = function(){
-				var _h = timeRoll.offsetHeight,
-					_t = parseInt(timeRoll.style.top,10),
-					_tt = _h >　Math.abs(_t) || _t >= 0 ? _t-10 : (_h || 0);
-				setCss(timeRoll,{
-					"top": _tt + 'px'
-				})
-				setTimeout(timeoutRoll,200);
-			}
-			
-		if(_h > rollBox.getAttribute("data-height")){
-			timeoutRoll();
-			setCss(timeRoll,{
-				"position": "relative",
-				"top": "0px"
+				return s;
 			});
-		}
-			
-	}
+		}	
+	})();
 </script>
 </body>
 </html>

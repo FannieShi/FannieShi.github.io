@@ -2,9 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>在输入框中显示提示信息</title>
+<title>Enter提交表单</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 </head>
 <body>
-	<input type="text" placeholder="HTML提示信息" /> <br />
+<div class="box1">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" placeholder="用户名" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="password" placeholder="密码" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<div class="checkbox text-left">
+					<label>
+						<input type="checkbox" checked />记住我
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="button" class="btn btn-primary btn-block" id="enterSubmit">提　交</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	(function(){
+		var submit = document.getElementById('enterSubmit');
+		var form = document.getElementsByTagName('form')[0];
+		submit.onclick = function(){
+			form.submit();
+			alert('表单已提交!');
+		}
+		document.onkeydown = function(e){
+			var e = e || window.event;
+			var keycode = e.keyCode || e.which;
+			if(keycode == 13){
+				form.submit();
+				alert('表单已提交！');
+			}
+		}
+	})();
+</script>
 </body>
 </html>
