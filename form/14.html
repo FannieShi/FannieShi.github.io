@@ -6,12 +6,69 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	#add,#del {
+		display: inline-block;
+		line-height: 34px;
+	}
+</style>
 </head>
 <body>
-	
-	
+<div class="box1">
+	<form action="" class="form-horizontal">
+		<div class="form-group">
+			<div class="col-sm-6">
+				<input type="text" id="input" class="form-control" />
+			</div>
+			<div class="col-sm-6 text-left">
+				<a href="#" id="add">添加</a>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-6">
+				<select name="" id="prov" class="form-control">
+					<option value="">湖北</option>
+					<option value="">湖南</option>
+					<option value="">北京</option>
+					<option value="">上海</option>
+					<option value="">深圳</option>
+				</select>
+			</div>
+			<div class="col-sm-6 text-left">
+				<a href="#" id="del">移除所选</a>
+			</div>
+		</div>
+	</form>
+</div>
 <script type="text/javascript">
-	
+	(function(){
+		var input = document.getElementById('input'),
+			select = document.getElementsByTagName('select')[0],
+			add = document.getElementById('add'),
+			del = document.getElementById('del');
+		
+		add.onclick = function(){
+			var v = trim(input.value);
+			if(v != ''){
+				select.options.add(new Option(v,v));
+				alert('添加成功！');
+			}else {
+				alert('添加的内容不能为空！')
+			}
+			return false;
+		}
+		
+		del.onclick = function(){
+			var index = select.selectedIndex;
+			select.remove(index);
+			alert('删除成功！');
+		}
+		
+		function trim(str){
+			return str.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,'');
+		}
+		
+	})();
 </script>
 </body>
 </html>
