@@ -6,12 +6,82 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	p label {
+		font-weight: normal;
+		cursor: pointer;
+	}
+	label input {
+		margin-right: 5px !important;
+	}
+</style>
 </head>
 <body>
-	
+<div class="box1">
+	<form class="form-horizontal text-left">
+		<h5>你掌握以下哪些技能？</h5>
+		<p><label><input type="checkbox" id="all" />全都掌握</label></p>
+		<p><label><input type="checkbox" name="skill" />HTML</label></p>
+		<p><label><input type="checkbox" name="skill" />CSS</label></p>
+		<p><label><input type="checkbox" name="skill" />JavaScript</label></p>
+		<p><label><input type="checkbox" name="skill" />HTML5/CSS3</label></p>
+		<p><label><input type="checkbox" name="skill" />PHP</label></p>
+		<p><label><input type="checkbox" name="skill" />JAVA</label></p>
+		<p><label><input type="checkbox" name="skill" />node.js</label></p>
+		<p><label><input type="checkbox" id="reverse" />反选</label></p>
+	</form>
+</div>
 	
 <script type="text/javascript">
-	
+	(function(){
+		var all = document.getElementById('all'),
+			input = document.getElementsByTagName('input'),
+			reverse = document.getElementById('reverse'),
+			skill = [];
+			
+		for(var i=0, len=input.length; i<len; i++){
+			var $id = input[i].id;
+			if($id != 'all' && $id != 'reverse'){
+				skill.push(input[i]);
+			}
+		}
+		
+		all.onclick = function(){
+			if(this.checked){
+				checked(skill, true);
+			}else{
+				checked(skill, false);
+			}	
+		};
+		
+		reverse.onclick = function(){
+			checked(skill, true, true);
+			all.checked = false;
+		}
+		
+		for(var i=0,len=skill.length; i<len; i++){
+			skill[i].onclick = function(){
+				if(!this.checked){
+					all.checked = false;
+				}
+			}
+		}
+		
+		function checked(obj, v, reverse){
+			var flag = reverse || false;
+			if(!(obj instanceof Array)){
+				obj = [obj];
+			}
+			var len = obj.length;
+			for(var i=0; i<len; i++){
+				if(!flag && obj[i].checked != v){
+					obj[i].checked = v;
+				}else if(flag){
+					obj[i].checked = !obj[i].checked;
+				}
+			}
+		}
+	})();
 </script>
 </body>
 </html>

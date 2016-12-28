@@ -2,29 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>光标停止在文字的最后</title>
+<title>动态操作下拉选项</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 </head>
 <body>
-	<h2>光标永远停在文字最后</h2>
-	<input type="text" id="cursorPos" placeholder="光标永远停在文字后面" />
+	
 	
 <script type="text/javascript">
-	window.onload = function(){
-		//绑定两种事件，以达到最大兼容性
-		var cursorPos = document.getElementById('cursorPos');
-		
-		cursorPos.onclick = cursorPos.onkeyup = function(){
-			var _vLen = this.value.length;
-			if(this.setSelectionRange){
-				this.setSelectionRange(_vLen,_vLen);
-			}else {
-				var a = this.createTextRange();
-				a.moveStart('character',_vLen);
-				a.collapse(true);
-				a.select();
-			}
-		}
-	}
+	
 </script>
 </body>
 </html>
