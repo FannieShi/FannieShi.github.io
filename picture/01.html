@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="box1">
-	<img id="img" src="http://fannieshi.com/wp-content/uploads/2016/11/img01.jpg" alt="" />
+	<img id="img" src="../extend/images/img01.jpg" alt="" />
 </div>
 <script type="text/javascript">
 	(function(){
@@ -34,7 +34,7 @@
 				}
 				current += step;
 				obj.style.opacity = current/100;
-				obj.style.fitler = 'alpha(opacity=' + current +')';
+				obj.style.filter = 'alpha(opacity=' + current +')';
 				
 				if(stop){
 					clearInterval(obj.timer);

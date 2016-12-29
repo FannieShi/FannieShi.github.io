@@ -2,8 +2,114 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>图片放大镜效果</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.box1 {
+		position: relative;
+	}
+	#smallPic {
+		position: relative;
+		cursor: move;
+	}
+	.layer {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100px;
+		height: 100px;
+		border: 1px solid #000;
+		background: #fff;
+		opacity: 0.3;
+		filter: alpha(opacity=30);
+		z-index: 1;
+		box-sizing: border-box;
+	}
+	#bigPic {
+		display: none;
+		position: absolute;
+		left: 520px;
+		top: 80px;
+		width: 218px;
+		height: 218px;
+		border: 1px solid #666;
+		overflow: hidden;
+	}
+	#bigPic img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		max-width: 743px;
+	}
+	
+</style>
 </head>
 <body>
+<div class="box1">
+	<div id="smallPic">
+		<span class="layer"></span>
+		<img src="../extend/images/img01.jpg" alt="小图" />
+	</div>
+	<div id="bigPic">
+		<img src="../extend/images/img01.jpg" alt="大图" />
+	</div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var small = document.getElementById('smallPic'),
+			big = document.getElementById('bigPic'),
+			smallPic = small.getElementsByTagName('img')[0],
+			bigPic = big.getElementsByTagName('img')[0],
+			layer = small.getElementsByTagName('span')[0];
+		
+		small.onmousemove = function(e){
+			var e = e || window.event;
+			layer.style.display = big.style.display = 'block';
+			var t = e.clientY - offsetTop(small) - (layer.clientHeight/2);
+			var l = e.clientX - offsetLeft(small) - (layer.clientWidth/2);
+			if(t < 0){
+				t = 0;
+			}else if(t > small.clientHeight - layer.clientHeight){
+				t = small.clientHeight - layer.clientHeight;
+			}
+
+			if(l < 0){
+				l = 0;
+			}else if(l > small.clientWidth - layer.clientWidth){
+				l = small.clientWidth - layer.clientWidth;
+			}
+
+			layer.style.top = t + 'px';
+			layer.style.left = l + 'px';
+			var scaleX = l/(small.clientWidth - layer.clientWidth),
+				scaleY = t/(small.clientHeight - layer.clientHeight);
+				
+			bigPic.style.left = -scaleX * (bigPic.clientWidth - big.clientWidth) + 'px';
+			bigPic.style.top = -scaleY * (bigPic.clientHeight - big.clientHeight) + 'px';
+		}
+		
+		function offsetTop(obj){
+			var offsetTop = obj.offsetTop,
+				parent = obj.offsetParent;
+			while(parent != null){
+				offsetTop += parent.offsetTop;
+				parent = parent.offsetParent;
+			}
+			return offsetTop;
+		}
+		function offsetLeft(obj){
+			var offsetLeft = obj.offsetLeft,
+				parent = obj.offsetParent;
+			while(parent != null){
+				offsetLeft += parent.offsetLeft;
+				parent = parent.offsetParent;
+			}
+			return offsetLeft;
+		}
+	})();
+</script>
 </body>
 </html>
