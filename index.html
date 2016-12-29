@@ -60,21 +60,19 @@
 	box.innerHTML = str;
 	
 	var h1 = document.getElementsByTagName('h1'),
-		dl = document.getElementsByTagName('dl'),
-		open = false;
+		dl = document.getElementsByTagName('dl');
 		
 	for(var i=0; i<h1.length; i++){
 		h1[i].index = i;
 		h1[i].onclick = function(){
+			var $display = dl[this.index].style.display;
 			for(var i=0; i< dl.length; i++){
 				dl[i].style.display = 'none';
 			}
-			if(open){
+			if( $display == 'block'){
 				dl[this.index].style.display = 'none'
-				open = false;
 			}else{
 				dl[this.index].style.display = 'block'
-				open = true;
 			}
 		}
 	}

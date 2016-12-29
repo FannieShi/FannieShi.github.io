@@ -19,6 +19,7 @@
 	border-bottom: none;
 }
 .catalog h1 {
+	line-height: 50px;
 	font-size:20px; 
 	font-family: '微软雅黑';
 	cursor: pointer;
