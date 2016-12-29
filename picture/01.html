@@ -3,7 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <title>图片移入移除改变透明度</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 </head>
 <body>
+<div class="box1">
+	<img id="img" src="http://fannieshi.com/wp-content/uploads/2016/11/img01.jpg" alt="" />
+</div>
+<script type="text/javascript">
+	(function(){
+		var img = document.getElementById('img');
+		
+		img.onmouseover = function(){
+			fade(this, 50);
+		}
+		
+		img.onmouseout = function(){
+			fade(this, 100);
+		}
+		
+		function fade(obj, target, speed){
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				var current = css(obj, 'opacity')*100,
+					speed = speed || 8,
+					step = (target - current)/speed,
+					stop = true;	
+				step = step > 0 ? Math.ceil(step) : Math.floor(step);
+				if(current != target){
+					stop = false;
+				}
+				current += step;
+				obj.style.opacity = current/100;
+				obj.style.fitler = 'alpha(opacity=' + current +')';
+				
+				if(stop){
+					clearInterval(obj.timer);
+					obj.timer = null;
+				}
+			},30)
+		}
+		
+		function css(obj, attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else {
+				return getComputedStyle(obj, null)[attr];
+			}
+		}
+		
+	})();
+</script>
 </body>
 </html>

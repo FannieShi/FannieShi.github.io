@@ -69,6 +69,9 @@ acronym {
 	border: 0;
 	font-variant: normal;
 }
+img {
+	max-width: 100%;
+}
 a {
 	color: #0a8cd2;
 	text-decoration: none;
