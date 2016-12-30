@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>鼠标悬停提示</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	ul,li {
+		position: relative;
+		list-style: circle;
+	}
+	.tip {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		line-height: 1.5;
+		padding: 3px 8px;
+		border-radius: 4px;
+		color: #fff;
+		background: rgba(0,0,0,.45);
+	}
+</style>
+</head>
+<body>
+<div class="box1">
+	<ul class="text-left">
+		<li><a href="#" data-tip="https://github.com/FannieShi">GitHub</a></li>
+		<li><a href="#" data-tip="http://fannieshi.com">Blog</a></li>
+		<li><a href="#" data-tip="me@fannieshi.com">Email</a></li>
+	</ul>
+</div>
+<script type="text/javascript">
+	(function(){
+		var ul = document.getElementsByTagName('ul')[0],
+			a = ul.getElementsByTagName('a'),
+			tip = createTip();
+			
+		for(var i=0, len=a.length; i<len; i++){
+			a[i].onmousemove = function(e){
+				tip.style.display = 'block';
+				tip.innerHTML = this.getAttribute('data-tip');
+				tip.style.left = e.clientX + 10 + 'px';
+				tip.style.top = e.clientY + 10 + 'px';
+			}
+			a[i].onmouseout = function(e){
+				tip.style.display = 'none';
+			}
+		}
+		
+		function createTip(){
+			var div = document.createElement('div');
+			div.className = 'tip';
+			div.innerHTML = '山东矿机';
+			return document.body.appendChild(div);
+		}
+		
+	})();
+</script>
+</body>
+</html>
