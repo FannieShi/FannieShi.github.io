@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>点击图片查看大图</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	#smallPic img {
+		cursor: pointer;
+	}
+	#bigPic {
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: #e5e5e5;
+		opacity: 0.95;
+		filter: alpha(opacity=95);
+	}
+	#bigPic img{
+		position: absolute;
+		
+		max-width: 1000px;
+	}
+	#close {
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		width: 37px;
+		height: 37px;
+		cursor: pointer;
+		background: url(../extend/images/close.png) no-repeat 0 0;
+	}
+	#close:hover {
+		background-position-y: -100px;
+	}
+</style>
+</head>
+<body>
+<div class="box1">
+	<div id="smallPic">
+		<img src="../extend/images/img02.jpg"/>
+	</div>
+	<div id="bigPic">
+		<span id="close"></span>
+		<img src=""/>
+	</div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var small = document.getElementById('smallPic'),
+			sImg = small.getElementsByTagName('img')[0],
+			big = document.getElementById('bigPic'),
+			bImg = big.getElementsByTagName('img')[0],
+			close = document.getElementById('close');
+			
+		sImg.onclick = function(){
+			big.style.display = 'block';
+			bImg.src = this.src;
+			center(bImg);
+		}
+		
+		close.onclick = function(){
+			big.style.display = 'none';
+		}
+			
+		function css(obj, attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else {
+				return getComputedStyle(obj, null)[attr];
+			}
+		}
+		function center(obj){
+			var parent = obj.offsetParent;	
+			//console.log(obj.style.left);
+			obj.style.left = (parent.offsetWidth - obj.offsetWidth)/2 + 'px';
+			obj.style.top = (parent.offsetHeight - obj.offsetHeight)/2 + 'px';
+			
+		}
+	})();
+</script>
+</body>
+</html>
