@@ -6,10 +6,54 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.btn { margin: 0 5px;}
+	.blue { background: #337ab7;}
+	.yellow { background: #f0ad4e;}
+	.green { background: #5cb85c;}
+</style>
 </head>
-<body>
+<body class="blue">
 <div class="box1">
-	
+	<button class="btn btn-primary" id="blue">默认</button>
+	<button class="btn btn-warning" id="yellow">黄色</button>
+	<button class="btn btn-success" id="green">绿色</button>
 </div>
+<script type="text/javascript">
+	var button = document.getElementsByTagName('button'),
+		body = document.getElementsByTagName('body')[0];
+	
+	init();
+
+	function init(){
+		if(getCookie('className')){
+			body.className = getCookie('className');
+		}
+	}
+		
+	for(var i=0,len=button.length; i<len; i++){
+		button[i].onclick = function(){
+			body.className = this.id;
+			setCookie('className',this.id,1);
+		}
+	}
+	
+	function setCookie(key,value,day){
+		var d = new Date();
+		d.setDate(d.getDate() + d);
+		document.cookie = key + '=' + value + ';expires=' + d;
+	}
+	
+	function getCookie(key){
+		var list = document.cookie.split(';');
+		for(var i=0,len=list.length; i<len; i++){
+			var c = list[i].split('=');
+			if(c[0] == key){
+				return c[1];
+			}
+		};
+		return false;
+	}
+</script>
 </body>
 </html>
