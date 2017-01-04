@@ -55,7 +55,7 @@
 			if(j == 0){
 				liStr += '<li><h1>' + catalog.title + '</h1><dl class="sub-catalog">';
 			}else {
-				liStr += '<dd><a href="' + catalog.url + '" target="_blank" title=" ' + catalog.title + '"> '+ catalog.title + '</a></dd>';
+				liStr += '<dd><a href="' + catalog.url + '" target="_blank" title=" ' + catalog.title + '"> '+ catalog.title + '</a><a href="https://github.com/FannieShi/fannieshi.github.io/blob/master/'+ catalog.url + '" title="查看源代码" class="code"></a></dd>';
 			}
 			if(j == items.length -1){
 				liStr += '</dl></li>';

@@ -59,3 +59,18 @@
 	-moz-transition: all .5s ease;
 	transition: all .5s ease;
 }
+.sub-catalog dd {
+	position: relative;
+}
+.sub-catalog .code {
+	position: absolute;
+	right: 0;
+	top: 11px;
+	width: 20px;
+	height: 20px;
+	background: url(../images/code.png) no-repeat center;
+	background-size: 20px 20px;
+}
+.sub-catalog .code:hover {
+	padding: 0;
+}
