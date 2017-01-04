@@ -7,71 +7,16 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 <style type="text/css">
-	#dialog {
-		display: none;
-	}
-	.ui-mask {
-		position: fixed;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 98;
-		background: rgba(0,0,0,.6);
-	}
-	.ui-dialog {
-		position: fixed;
-		left: 50%;
-		top: 40%;
-		width: 400px;
-		height: 160px;
-		border-radius: 5px;
-		margin-left: -200px;
-		margin-top: -80px;
-		z-index: 99;
-		text-align: center;
-		background: #fff;
-	}
-	.ui-dialog-title {
-		position: relative;
-	}
-	.ui-dialog-title h1 {
-		margin: 0;
-		font-size: 24px;
-		line-height: 50px;
-		letter-spacing: 5px;
-		text-indent: 5px;
-	}
-	.ui-dialog-title .ui-dialog-close {
-		position: absolute;
-		right: 12px;
-		top: 0px;
-		font-size: 30px;
-		text-decoration: none;
-	}
-	.ui-dialog-main {
-		height: 69px;
-		padding: 10px 30px;
-		box-sizing: border-box;
-		text-align: left;
-	}
-	.ui-dialog-footer {
-		font-size: 0;
-		border-top: 1px solid #e1e1e1;
-	}
-	.ui-dialog-footer a {
-		display: inline-block;
-		width: 50%;
-		box-sizing: border-box;
-		border-right: 1px solid #e1e1e1;
-		line-height: 40px;
-		font-size: 14px;
-		text-decoration: none;
-		color: ;
-	}
-	.ui-dialog-footer a:last-child {
-		border-right: 0;
-	}
+	#dialog { display: none; }
+	.ui-mask { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 98; background: rgba(0,0,0,.6); }
+	.ui-dialog { position: fixed; left: 50%; top: 40%; width: 400px; height: 160px; border-radius: 5px; z-index: 99; text-align: center; background: #fff; }
+	.ui-dialog-title { position: relative; }
+	.ui-dialog-title h1 { margin: 0; font-size: 24px; line-height: 50px; letter-spacing: 5px; text-indent: 5px; cursor: move; }
+	.ui-dialog-title .ui-dialog-close { position: absolute; right: 12px; top: 0px; font-size: 30px; text-decoration: none; }
+	.ui-dialog-main { height: 69px; padding: 10px 30px; box-sizing: border-box; text-align: left; }
+	.ui-dialog-footer { font-size: 0; border-top: 1px solid #e1e1e1; }
+	.ui-dialog-footer a { display: inline-block; width: 50%; box-sizing: border-box; border-right: 1px solid #e1e1e1; line-height: 40px; font-size: 14px; text-decoration: none; color: ; }
+	.ui-dialog-footer a:last-child { border-right: 0; }
 </style>
 </head>
 <body>
@@ -84,7 +29,7 @@
 		var button = document.getElementById('button');
 		var alert = {
 			id: 'dialog',
-			html: 	'<div id="ui-mask" class="ui-mask"></div><div class="ui-dialog"><div class="ui-dialog-title"><h1>通知</h1><a href="#" id="ui-close" class="ui-dialog-close">&times;</a></div><div class="ui-dialog-main">2017年的第一封信，祝大家新年快乐！</div><div class="ui-dialog-footer"><a href="#" id="ui-cancel" class="ui-default">取消</a><a href="#" id="ui-ok" class="ul-primary">确定</a></div></div>'
+			html: 	'<div id="ui-mask" class="ui-mask"></div><div id="ui-dialog" class="ui-dialog"><div class="ui-dialog-title"><h1>通知</h1><a href="#" id="ui-close" class="ui-dialog-close">&times;</a></div><div class="ui-dialog-main">2017年的第一封信，祝大家新年快乐！</div><div class="ui-dialog-footer"><a href="#" id="ui-cancel" class="ui-default">取消</a><a href="#" id="ui-ok" class="ul-primary">确定</a></div></div>'
 		}
 		button.onclick = function(){
 			new Dialog(alert);
@@ -111,17 +56,20 @@
 					document.body.appendChild(div);
 				}
 				this.DOM = document.getElementById(this.id);
+				this.dialog = document.getElementById('ui-dialog');
 				this.show();
+				this.center(this.dialog);
 			},
 			setParam: function(){
 				this.ok = document.getElementById('ui-ok');
 				this.cancel = document.getElementById('ui-cancel');
 				this.close = document.getElementById('ui-close');
 				this.mask = document.getElementById('ui-mask');
+				this.h1 = this.DOM.getElementsByTagName('h1')[0];
 			},
 			bind: function(){
 				var that = this;
-				Drag();
+				Drag(this.h1);
 				this.ok.addEventListener('click', function(){
 					that.hide();
 				});
@@ -140,8 +88,49 @@
 			},
 			hide: function(){
 				this.DOM.style.display = 'none';
+			},
+			center: function(el){
+				var w = el.offsetWidth,
+					h = el.offsetHeight;
+				
+				el.style.top = (document.body.clientHeight - h)/2 > 250 ? (document.body.clientHeight - h)/2 : 250 + 'px';
+				el.style.left = (document.body.clientWidth - w)/2 + 'px';
 			}
 		}
+		
+		function Drag(el){
+			var startX = 0,
+				startY = 0,
+				lastX  = 0,
+				lastY  = 0,
+				dialog = document.getElementById('ui-dialog'),
+				t = 0,
+				l = 0;
+				
+			drag = {
+				down: function(e){
+					startX = e.clientX;
+					startY = e.clientY;
+					t = parseInt(dialog.style.top),
+					l = parseInt(dialog.style.left);
+					el.addEventListener('mousemove', drag.move);
+					el.addEventListener('mouseup', drag.up);
+				},
+				move: function(e){
+					lastX = e.clientX;
+					lastY = e.clientY;
+					dialog.style.top  = t + lastY - startY + 'px';
+					dialog.style.left = l + lastX - startX + 'px';
+				},
+				up: function(){
+					el.removeEventListener('mousemove', drag.move);
+					el.removeEventListener('mouseup', drag.up);
+				}
+			}		
+			el.addEventListener('mousedown', drag.down)
+		}
+		
+		
 	})();
 </script>
 </body>

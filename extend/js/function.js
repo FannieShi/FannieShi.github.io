@@ -27,3 +27,12 @@ function setCookie(key, value, day){
 	d.setDate(d.getDate() + day);
 	document.cookie = key + '=' + value +';expires=' + d;
 }
+
+/*style*/
+function css(ele, attr){
+	if(ele.currentStyle){
+		return ele.currentStyle[attr];
+	}else {
+		return getComputedStyle(ele, null)[attr];
+	}
+}
