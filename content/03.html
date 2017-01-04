@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>拖拽窗口</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.ui-mask {
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 98;
+		background: rgba(0,0,0,.6);
+	}
+	.ui-dialog {
+		display: none;
+		position: fixed;
+		left: 50%;
+		top: 40%;
+		width: 400px;
+		height: 160px;
+		border-radius: 5px;
+		margin-left: -200px;
+		margin-top: -80px;
+		z-index: 99;
+		text-align: center;
+		background: #fff;
+	}
+	.ui-dialog-title {
+		position: relative;
+	}
+	.ui-dialog-title h1 {
+		margin: 0;
+		font-size: 24px;
+		line-height: 50px;
+		letter-spacing: 5px;
+		text-indent: 5px;
+	}
+	.ui-dialog-title .ui-dialog-close {
+		position: absolute;
+		right: 12px;
+		top: 0px;
+		font-size: 30px;
+		text-decoration: none;
+	}
+	.ui-dialog-main {
+		height: 69px;
+		padding: 10px 30px;
+		box-sizing: border-box;
+		text-align: left;
+	}
+	.ui-dialog-footer {
+		font-size: 0;
+		border-top: 1px solid #e1e1e1;
+	}
+	.ui-dialog-footer a {
+		display: inline-block;
+		width: 50%;
+		box-sizing: border-box;
+		border-right: 1px solid #e1e1e1;
+		line-height: 40px;
+		font-size: 14px;
+		text-decoration: none;
+		color: ;
+	}
+	.ui-dialog-footer a:last-child {
+		border-right: 0;
+	}
+</style>
+</head>
+<body>
+<div class="box1">
+	<button id="button" class="btn btn-primary">点击我</button>
+</div>
+
+<script type="text/javascript">
+	(function(){
+		var button = ducument.getElementById('button');
+		var dialog = {
+			id: 'dialog',
+			html:  '<div class="ui-mask"></div>
+					<div class="ui-dialog">
+						<div class="ui-dialog-title">
+							<h1>通知</h1>
+							<a href="" class="ui-dialog-close">&times;</a>
+						</div>
+						<div class="ui-dialog-main">
+							2017年的第一封信，祝大家新年快乐！
+						</div>
+						<div class="ui-dialog-footer">
+							<a href="#" id="ui-cancel" class="ui-default">取消</a>
+							<a href="#" id="ui-ok" class="ul-primary">确定</a>
+						</div>
+					</div>'
+		}
+		button.onclick = function(){
+			new Dialog();
+		}
+	})();
+</script>
+</body>
+</html>

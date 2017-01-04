@@ -20,3 +20,10 @@ function insertAfter(newElement, targetElement){
 		parent.insertBefore(newElement, targetElement.nextSibling);
 	}
 }
+
+/*cookie*/
+function setCookie(key, value, day){
+	var d = new Date();
+	d.setDate(d.getDate() + day);
+	document.cookie = key + '=' + value +';expires=' + d;
+}
