@@ -1,5 +1,7 @@
 # fannieshi.github.io
-My Front-End coding
+My Front-End coding based on JavaScript
+
+基于原生JavaScript的练习
 
 Preview online: 
 https://fannieshi.github.io/
