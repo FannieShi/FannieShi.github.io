@@ -7,8 +7,10 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
 <style type="text/css">
-	.ui-mask {
+	#dialog {
 		display: none;
+	}
+	.ui-mask {
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -18,7 +20,6 @@
 		background: rgba(0,0,0,.6);
 	}
 	.ui-dialog {
-		display: none;
 		position: fixed;
 		left: 50%;
 		top: 40%;
@@ -80,26 +81,66 @@
 
 <script type="text/javascript">
 	(function(){
-		var button = ducument.getElementById('button');
-		var dialog = {
+		var button = document.getElementById('button');
+		var alert = {
 			id: 'dialog',
-			html:  '<div class="ui-mask"></div>
-					<div class="ui-dialog">
-						<div class="ui-dialog-title">
-							<h1>通知</h1>
-							<a href="" class="ui-dialog-close">&times;</a>
-						</div>
-						<div class="ui-dialog-main">
-							2017年的第一封信，祝大家新年快乐！
-						</div>
-						<div class="ui-dialog-footer">
-							<a href="#" id="ui-cancel" class="ui-default">取消</a>
-							<a href="#" id="ui-ok" class="ul-primary">确定</a>
-						</div>
-					</div>'
+			html: 	'<div id="ui-mask" class="ui-mask"></div><div class="ui-dialog"><div class="ui-dialog-title"><h1>通知</h1><a href="#" id="ui-close" class="ui-dialog-close">&times;</a></div><div class="ui-dialog-main">2017年的第一封信，祝大家新年快乐！</div><div class="ui-dialog-footer"><a href="#" id="ui-cancel" class="ui-default">取消</a><a href="#" id="ui-ok" class="ul-primary">确定</a></div></div>'
 		}
 		button.onclick = function(){
-			new Dialog();
+			new Dialog(alert);
+		}
+		
+		function Dialog(){
+			var args = arguments[0];
+			for(var i in args){
+				this[i] = args[i];
+			}
+			this.init();
+		}
+		Dialog.prototype = {
+			init: function(){
+				this.render();
+				this.setParam();
+				this.bind();
+			},
+			render: function(){
+				if(!document.getElementById(this.id)){
+					var div = document.createElement('div');
+					div.id = this.id;
+					div.innerHTML = this.html;
+					document.body.appendChild(div);
+				}
+				this.DOM = document.getElementById(this.id);
+				this.show();
+			},
+			setParam: function(){
+				this.ok = document.getElementById('ui-ok');
+				this.cancel = document.getElementById('ui-cancel');
+				this.close = document.getElementById('ui-close');
+				this.mask = document.getElementById('ui-mask');
+			},
+			bind: function(){
+				var that = this;
+				Drag();
+				this.ok.addEventListener('click', function(){
+					that.hide();
+				});
+				this.cancel.addEventListener('click', function(){
+					that.hide();
+				})
+				this.close.addEventListener('click', function(){
+					that.hide();
+				})
+				this.mask.addEventListener('click', function(){
+					that.hide();
+				})
+			},
+			show: function(){
+				this.DOM.style.display = 'block';
+			},
+			hide: function(){
+				this.DOM.style.display = 'none';
+			}
 		}
 	})();
 </script>
