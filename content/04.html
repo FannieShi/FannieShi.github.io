@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>选项卡轮播</title>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.nav {
+		font-size: 0; 
+		line-height: 0;
+		text-align: left;
+	}
+	.nav li {
+		display: inline-block;
+		width: 100px;
+		line-height: 30px;
+		font-size: 14px;
+		text-align: center;
+		background: #F1F1EF;
+	}
+	.nav li.on {
+		color: #fff;
+		background: #729a64;
+	}
+	.items {
+		display: none;
+		opacity: 0;
+		width: 500px;
+		height: 300px;
+	}
+	.warm {
+		background: #eee25c;
+	}
+	.cold {
+		background: #729a64;
+	}
+	.items.on {
+		display: block;
+		opacity: 1;
+	}
+</style>
+</head>
+<body>
+<div class="box1">
+	<div class="tab">
+		<ul class="nav">
+			<li class="on">冷色调</li>
+			<li>暖色调</li>
+		</ul>
+		<div class="items cold on">
+			
+		</div>
+		<div class="items warm">
+			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	(function(){
+		var li = document.querySelectorAll('.nav li'),
+			lLen = li.length,
+			items = document.querySelectorAll('.items'),
+			iLen = items.length,
+			current = 0;
+			
+		function tab(index){
+			console.log(index);
+			for(var i=0; i<lLen; i++){
+				if(i!=index){
+					li[i].classList.remove('on');
+					items[i].classList.remove('on');
+				}	
+			}
+			li[index].classList.add('on');
+			items[index].classList.add('on');		
+		}
+		
+		var timer = setInterval(function(){
+			if(current >= lLen -1){
+				current = 0;
+			}else {
+				current++;
+			}
+			tab(current);
+		},1000);
+	})();
+</script>
+</body>
+</html>
