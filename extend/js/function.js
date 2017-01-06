@@ -36,3 +36,5 @@ function css(ele, attr){
 		return getComputedStyle(ele, null)[attr];
 	}
 }
+
+var ua = navigator.userAgent.toLowerCase();
