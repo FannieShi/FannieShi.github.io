@@ -61,10 +61,36 @@
 		console.log(box4.offsetTop);
 		console.log(box4.offsetParent);
 		
-		/*父级元素不为body,且不为定位元素,各浏览器表现一致，表现为最近的一个有定位元素的父级元素*/
+		/*父级元素不为body,且不为定位元素,各浏览器表现一致，表现为最近的一个有定位元素的祖先元素*/
 		var box5 = document.getElementById('box5');
 		console.log(box5.offsetTop);
 		console.log(box5.offsetParent);
+		console.log(offsetTop(box5));
+		
+//		兼容方法
+//		1.控制好祖先元素的定位属性
+//		2.使所有的offsetTop/offsetLeft,都是相对于body
+		function offsetTop(obj){
+			var parent = obj.offsetParent,
+				offsetTop = obj.offsetTop;
+				
+			while(parent){
+				offsetTop += parent.offsetTop;
+				parent = parent.offsetParent;
+			}
+			return offsetTop;
+		}
+		
+		function offsetLeft(obj){
+			var parent = obj.offsetParent,
+				offsetLeft = obj.offsetLeft;
+				
+			while(parent){
+				offsetLeft += parent.offsetLeft;
+				parent = parent.offsetParent;
+			}
+			return offsetLeft;
+		}
 		
 	})();
 </script>
