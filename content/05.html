@@ -12,7 +12,7 @@
 	}
 	.ads {
 		position: absolute;
-		top: 25%;
+		top: 200px;
 		width: 150px;
 	}
 	.ads:first-child {
@@ -97,10 +97,11 @@
 			bind: function(){
 				var that = this,
 					scrollTop = 0,
+					top = parseInt(fun.css(that.a, 'top')),
 					t = 0;
 				fun.on(window, 'scroll', function(){
 					scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-					t = scrollTop + that.a.offsetHeight;
+					t = scrollTop + top;
 					fun.animate(that.a, 'top', t);
 					fun.animate(that.b, 'top', t);
 				});
