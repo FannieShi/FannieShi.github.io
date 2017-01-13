@@ -6,8 +6,108 @@
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" type="text/css" href="../extend/css/commen.css"/>
+<style type="text/css">
+	.box1 {
+		height: 3000px;
+	}
+	.ads {
+		position: absolute;
+		top: 25%;
+		width: 150px;
+	}
+	.ads:first-child {
+		left: 10px;
+	}
+	.ads:last-child {
+		right: 10px;
+	}
+</style>
 </head>
 <body>
-	
+<div class="box1"></div>
+<script type="text/javascript">
+	(function(){
+		var defaults = {
+			id: 'dialog',
+			tpl: '<img src="../extend/images/img03.jpg"/>'
+		}
+		var fun = {
+			$: function(id){
+				return document.querySelector('id');
+			},
+			on: function(el, event, handle){
+				el.addEventListener(event, handle, false);
+			},
+			off: function(el, event, handle){
+				el.removeEventListener(event, handle, false);
+			},
+			css: function(o, attr){
+				if(o.currentStyle){
+					return o.currentStyle[attr];
+				}else {
+					return getComputedStyle(o,false)[attr];
+				}
+			},
+			animate: function(o, attr, target){
+				var that = this;
+				clearInterval(o.timer);
+				o.timer = setInterval(function(){
+					var cur = parseInt(that.css(o, attr));
+					var stop = true;
+					var speed = (target-cur)/8;
+					speed = speed < 0 ? Math.ceil(speed) : Math.floor(speed);
+					
+					if(cur != target){
+						stop = false;
+					}
+					o.style[attr] = cur + speed + 'px';
+					if(stop){
+						clearInterval(o.timer);
+					}
+				}, 50)
+			}
+		}
+		function Adv(){
+			var args = arguments[0];
+			for(var i in args){
+				this[i] = args[i];
+			}
+			this.init();
+		}
+		Adv.prototype = {
+			init: function(){
+				this.render();
+				this.bind();
+			},
+			render: function(){
+				var div = document.createElement('div'),
+					a = document.createElement('div'),
+					b = null;
+					
+				div.className = 'box';
+				a.className = 'ads';
+				a.innerHTML = this.tpl;
+				b = a.cloneNode(true);
+				div.appendChild(a);
+				div.appendChild(b);
+				document.body.appendChild(div);
+				this.a = a;
+				this.b = b;			
+			},
+			bind: function(){
+				var that = this,
+					scrollTop = 0,
+					t = 0;
+				fun.on(window, 'scroll', function(){
+					scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					t = scrollTop + that.a.offsetHeight;
+					fun.animate(that.a, 'top', t);
+					fun.animate(that.b, 'top', t);
+				});
+			}
+		}
+		new Adv(defaults);
+	})();
+</script>
 </body>
 </html>
