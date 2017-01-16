@@ -102,7 +102,7 @@
 				}
 				slide.style.transform = 'translate('+ (-cell*index + moveX - startX ) +'px, 0)';
 				slide.style.transition = '.5s';
-				//return false;
+				e.stopPropagation();
 			},
 			end: function(e){
 				var moveX = e.clientX ? e.clientX : e.changedTouches[0].clientX;
@@ -124,7 +124,7 @@
 			}
 		}
 		
-		slide.addEventListener('touchstart', drag.start, false);
+		document.addEventListener('touchstart', drag.start, false);
 		slide.addEventListener('webkitAnimationEnd', drag.finish, false);
 	})();
 </script>
