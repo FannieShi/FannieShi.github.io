@@ -15,3 +15,18 @@ function getHTTPObject(){
 	}
 	return new XMLHttpRequest();
 }
+
+function Ajax(type, url, async){
+	var request = getHTTPObject();
+	if(request){
+		request.open(type, url, async);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4){
+				//Do something...
+			}
+		}
+		request.send(null);
+	}else {
+		alert('Sorry, your browser doesn\'t support XMLHttpRequest');
+	}
+}
