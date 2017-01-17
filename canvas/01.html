@@ -1,9 +1,171 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
+<head>
+<meta charset="UTF-8">
+<title>canvas实现时钟</title>
+<style type="text/css">
+	.box { text-align: center; }
+	#canvas { background: #f1f1f1; }
+</style>
+</head>
+<body>
+<div class="box">
+	<canvas id="canvas" width="500" height="500">
+		您的浏览器不支持canvas!
+	</canvas>
+</div>
+<script type="text/javascript">
+	(function(){
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var h,m,s;
+		var clock = {
+			init: function(){
+				this.drawBase();
+				this.drawMinDegree();
+				this.drawHourDegree();
+				this.drawNumbers();
+				this.nowTime();
+				this.drawHour();
+				this.drawMin();
+				this.drawSec();
+				this.drawCenter();
+				this.play();
+			},
+			drawBase: function(){
+				//绘制表盘
+				ctx.beginPath();
+				ctx.lineWidth = 10;
+				ctx.strokeStyle = '#9cf';
+				ctx.arc(250,250,200,0,360,false);  
+				ctx.closePath();
+				ctx.stroke();   
+			},
+			drawHourDegree: function(){
+				//绘制时钟刻度
+				for(var i=0; i<12; i++){
+					ctx.save();
+					ctx.beginPath();
+					ctx.translate(250, 250);
+					ctx.rotate(30*i*Math.PI/180);
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = '#333';
+					ctx.moveTo(0, -190);
+					ctx.lineTo(0, -170);
+					ctx.closePath();
+					ctx.stroke();
+					ctx.restore();
+				}
+			},
+			drawMinDegree: function(){
+				//绘制分钟刻度
+				for(var i=0; i<60; i++){
+					ctx.save();
+					ctx.beginPath();
+					ctx.translate(250,250);
+					ctx.rotate(6*i*Math.PI/180);
+					ctx.strokeStyle = '#999';
+					ctx.lineWidth = 5;
+					ctx.moveTo(0, -190);
+					ctx.lineTo(0, -180);
+					ctx.closePath();
+					ctx.stroke();
+					ctx.restore();
+				}
+			},
+			drawNumbers: function(){
+				//绘制数字
+				ctx.save();
+				var nWidth = 0,
+					angle = 0;
+				ctx.beginPath();
+				ctx.font = "19px Arial";
+				ctx.translate(250, 250);
+				for(var i=1; i<=12; i++){
+					if( i%3 == 0){
+						angle = Math.PI/6*(i-3);
+						nWidth = ctx.measureText(i).width;
+						ctx.fillText(i, Math.cos(angle)*150 - nWidth/2, Math.sin(angle)*150 + nWidth/2);
+					}
+				}
+				ctx.restore();
+			},
+			drawHour: function(){
+				//绘制时针
+				ctx.save();
+				ctx.beginPath();
+				ctx.lineWidth = 9;
+				ctx.strokeStyle = '#333';
+				ctx.translate(250, 250);
+				ctx.rotate(h/12*2*Math.PI);
+				ctx.moveTo(0,30);
+				ctx.lineTo(0,-110);
+				ctx.closePath();
+				ctx.stroke();
+				ctx.restore();
+			},
+			drawMin: function(){
+				ctx.save();
+				ctx.beginPath();
+				ctx.lineWidth = 7;
+				ctx.strokeStyle = 'green';
+				ctx.translate(250, 250);
+				ctx.rotate(m/60*Math.PI*2);
+				ctx.moveTo(0, 25);
+				ctx.lineTo(0, -130);
+				ctx.closePath();
+				ctx.stroke();
+				ctx.restore();
+			},
+			drawSec: function(){
+				ctx.save();
+				ctx.beginPath();
+				ctx.lineWidth = 3;
+				ctx.strokeStyle = 'red';
+				ctx.translate(250, 250);
+				ctx.rotate(s/60*Math.PI*2);
+				ctx.moveTo(0, 25);
+				ctx.lineTo(0, -150);
+				ctx.closePath();
+				ctx.stroke();
+				ctx.restore();
+			},
+			drawCenter: function(){
+				ctx.beginPath();
+				ctx.fillStyle = '#222';
+				ctx.arc(250,250,10,0,360,false);
+				ctx.closePath();
+				ctx.fill();
+			},
+			nowTime: function(){
+				var now = new Date();
+				h = now.getHours();
+				m = now.getMinutes();
+				s = now.getSeconds();
+				h += m/60;
+				h = h > 12 ? h-12 : h;
+			},
+			play: function(){
+				clearInterval(this.timer);
+				var that = this;
+				this.timer = setInterval(function(){
+					ctx.clearRect(0,0,500,500);
+					that.drawBase();
+					that.drawMinDegree();
+					that.drawHourDegree();
+					that.drawNumbers();
+					that.nowTime();
+					that.drawHour();
+					that.drawMin();
+					that.drawSec();
+					that.drawCenter();
+				},1000)
+			}
+		}
+		
+		//时钟初始化
+		clock.init();
+	})();
+</script>
+</body>
 </html>
