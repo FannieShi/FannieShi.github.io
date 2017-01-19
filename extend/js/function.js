@@ -37,14 +37,14 @@ function css(ele, attr){
 	}
 }
 
-/**
+/**by FannieShi 2017-01-19
+ * GitHub: https://github.com/fannieshi
  * o: 缓动对象, 必须;
  * a: 缓动属性, 字符串, 必须, 只对能通过obj[attr]或者obj.style[attr]访问的属性有效;
  * t: 目标数值, 可选, 默认值为0;
  * r: 缓动速率, 可选, 默认值为5;
  * callback: 回调函数, 参数为isEnding, 表示动画是否结束, 可选.
  */
-
 function easeout(o, a, t, r, callback){
 	if(!(o && a)){ return ;}
 	if(typeof callback != 'function'){ callback = function(){} };
@@ -66,3 +66,12 @@ function easeout(o, a, t, r, callback){
 	})();
 }
 
+//requestAnimationFrame兼容
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function(callback){
+            	window.setTimeout(callback, 1000 / 60);
+            };
+})();
