@@ -2,25 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>可复用缓动动画</title>
+<title>缓动动画</title>
 <style type="text/css">
-	body {
-		height: 3000px;
-	}
-	.box {
-		margin: 50px auto;
-		background: #ccc;
-	}
-	.backTop {
-		position: fixed;
-		right: 50px;
-		bottom: 50px;
-		width: 40px;
-		height: 40px;
-		border-radius: 100%;
-		background: rgba(0,0,0,.4) url(../extend/images/backTop.png) no-repeat center;
-		cursor: pointer;
-	}
+	body { height: 3000px; }
+	.box { margin: 50px auto; background: #ccc; }
+	.backTop { position: fixed; right: 50px; bottom: 50px; width: 40px; height: 40px; border-radius: 100%; background: rgba(0,0,0,.4) url(../extend/images/backTop.png) no-repeat center; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -31,7 +17,7 @@
 	(function(){	
 		/**by FannieShi 2017-01-19
 		 * o: 缓动对象, 必须;
-		 * a: 缓动属性, 字符串, 必须, 只对能通过obj[attr]或者obj.style[attr]访问的属性有效;
+		 * a: 缓动属性, 字符串, 必须, 只对能通过obj[attr]或者obj.style[attr]访问的属性有效,如需分离,可在组件外部设置后再调用;
 		 * t: 目标数值, 可选, 默认值为0;
 		 * r: 缓动速率, 可选, 默认值为5;
 		 * callback: 回调函数, 参数为isEnding, 表示动画是否结束, 可选.
