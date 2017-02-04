@@ -210,6 +210,7 @@ body {
   z-index: 9;
   opacity: 1;
   pointer-events: auto;
+  cursor: pointer;
 }
 
 .pic-close:before, .pic-close:after {
