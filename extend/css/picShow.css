@@ -35,14 +35,27 @@ body {
   width: 19.2%;
   height: 100%;
   background: #555;
-}
-
-.pic:hover {
-  cursor: pointer;
+  transition: width 1s, transform 1s 1s, opacity 1s 1s;
 }
 
 .pic:hover .pic-bg:after {
   opacity: 0 !important;
+}
+
+.pic:not(.on) {
+  cursor: pointer;
+}
+
+.pic.on {
+  z-index: 1;
+  width: 100%;
+  transform: translate(0, 0) !important;
+  transition: transform 1s, width 1s 1s;
+}
+
+.pic.on .pic-bg {
+  transform: translate(0, 0) !important;
+  transition: transform 1s !important;
 }
 
 .pic-bd {
@@ -87,8 +100,15 @@ body {
   transform-origin: 50% 50%;
 }
 
+.container.active .pic:nth-child(1):not(.on) {
+  transform: scale(0.5) translate(0%, 0);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
 .pic:nth-child(1) .pic-bg {
   transform: translate(0%, 0);
+  transition: transform 1s 1s;
 }
 
 .pic:nth-child(1) .pic-bg:before {
@@ -100,8 +120,15 @@ body {
   transform-origin: 155.20833% 50%;
 }
 
+.container.active .pic:nth-child(2):not(.on) {
+  transform: scale(0.5) translate(105.20833%, 0);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
 .pic:nth-child(2) .pic-bg {
   transform: translate(-19.2%, 0);
+  transition: transform 1s 1s;
 }
 
 .pic:nth-child(2) .pic-bg:before {
@@ -113,8 +140,15 @@ body {
   transform-origin: 260.41667% 50%;
 }
 
+.container.active .pic:nth-child(3):not(.on) {
+  transform: scale(0.5) translate(210.41667%, 0);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
 .pic:nth-child(3) .pic-bg {
   transform: translate(-38.4%, 0);
+  transition: transform 1s 1s;
 }
 
 .pic:nth-child(3) .pic-bg:before {
@@ -126,8 +160,15 @@ body {
   transform-origin: 365.625% 50%;
 }
 
+.container.active .pic:nth-child(4):not(.on) {
+  transform: scale(0.5) translate(315.625%, 0);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
 .pic:nth-child(4) .pic-bg {
   transform: translate(-57.6%, 0);
+  transition: transform 1s 1s;
 }
 
 .pic:nth-child(4) .pic-bg:before {
@@ -139,10 +180,69 @@ body {
   transform-origin: 470.83333% 50%;
 }
 
+.container.active .pic:nth-child(5):not(.on) {
+  transform: scale(0.5) translate(420.83333%, 0);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
 .pic:nth-child(5) .pic-bg {
   transform: translate(-76.8%, 0);
+  transition: transform 1s 1s;
 }
 
 .pic:nth-child(5) .pic-bg:before {
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-7.jpg");
+}
+
+.pic-close {
+  z-index: -1;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.pic.on .pic-close {
+  z-index: 9;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pic-close:before, .pic-close:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 6px;
+  margin-top: -3px;
+  opacity: 0;
+  background: #fff;
+  transition: opacity 1s;
+}
+
+.pic.on .pic-close:before, .pic.on .pic-close:after {
+  opacity: 1;
+}
+
+.pic-close:before {
+  transform: rotate(45deg) translate(100%);
+}
+
+.pic.on .pic-close:before {
+  transition: transform 0.3s 1.5s cubic-bezier(0.72, 0.09, 0.32, 1.57), opacity 1s 1.5s;
+  transform: rotate(45deg) translate(0);
+}
+
+.pic-close:after {
+  transform: rotate(-45deg) translate(100%);
+}
+
+.pic.on .pic-close:after {
+  transition: transform 0.3s 1.8s cubic-bezier(0.72, 0.09, 0.32, 1.57), opacity 1s 1.8s;
+  transform: rotate(-45deg) translate(0);
 }
