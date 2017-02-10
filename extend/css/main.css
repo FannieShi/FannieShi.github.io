@@ -1,7 +1,11 @@
 *{ margin:0; padding:0;}
+body {
+	font-family: Consolas, "微软雅黑", Monaco;
+	background: url("../images/img07.jpg") no-repeat;
+}
 .container {
 	width: 500px;
-	margin: 20px auto;
+	margin: 50px auto;
 	font-size: 22px;
 }
 .catalog {
@@ -10,6 +14,7 @@
 	border-radius: 5px;
 	box-shadow: 2px 2px 3px #ececec;
 	list-style: none;
+	background: rgba(255, 255, 255, .75);
 }
 .catalog li {
 	border-bottom: 1px solid #f2f2f2;
@@ -20,8 +25,7 @@
 }
 .catalog h1 {
 	line-height: 50px;
-	font-size:20px; 
-	font-family: '微软雅黑';
+	font-size:20px;
 	cursor: pointer;
 	color: #0a8cd2;
 	-webkit-transition: all .5s ease;
@@ -42,7 +46,6 @@
 }
 .sub-catalog a {
 	display: block;
-	font-family: "微软雅黑";
 	color: #0a8cd2;
 	text-decoration: none;
 	-webkit-transition: all .5s ease;
