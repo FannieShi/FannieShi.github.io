@@ -75,3 +75,67 @@ window.requestAnimFrame = (function(){
             	window.setTimeout(callback, 1000 / 60);
             };
 })();
+
+/**
+ * by FannieShi 2017-02-13
+ * http://fannieshi.com/
+ * 倒计时实现
+ * @param o: 对象, 格式如：{day: #day, hour: #hour}, 支持天、时、分、秒、毫秒;
+ * @param t: 截止时间, 格式如: 2017/02/13 19:00:00, 字符串;
+ * @param open: 开关, 可选, 默认为false, 控制时间是否自动叠加到下一单位。
+ * 调用示例
+ * var sf = {
+ *     $: function(id){
+ *         return document.getElementById(id);
+ *     },
+ *     obj: function(){
+ *         return {
+ *             msec: this.$('msec'),
+ *             sec: this.$('sec'),
+ *             minute: this.$('minute'),
+ *             hour: this.$('hour'),
+ *             day: this.$('day')
+ *         }
+ *     },
+ *     date: '2018/01/01 00:00:00'
+ * }
+ * new countDown(sf.obj(), sf.date, true);
+ */
+function countDown(o, t, open){
+    //参数处理，变量声明
+    if(!o || !t) return ;
+    open = open || false;
+    var future = new Date(t),
+        now = new Date();
+    var diff = future.getTime() - now.getTime(),
+        c = {
+            day: '0',
+            hour: '0',
+            minute: '0',
+            sec: '0',
+            msec: '00'
+        };
+    //时间处理
+    if(diff > 0){
+        c.msec = (diff % 1000) < 100 ? '0' + (diff % 1000) :  diff % 1000;
+        c.sec = (diff - c.msec)/1000 % 60;
+        c.minute = (diff - c.msec - c.sec * 1000)/1000/60 % 60;
+        c.hour = (diff - c.msec - c.sec * 1000 - c.minute * 1000 * 60)/1000/60/60 % 24;
+        c.day = (diff - c.msec - c.sec * 1000 - c.minute * 1000 * 60 - c.hour * 1000 * 60 * 60)/1000/60/60/24;
+        if(open){
+            c.hour += o.day ? 0 : c.day * 24;
+            c.minute += o.hour ? 0 : c.hour * 60;
+            c.sec += o.minute ? 0 : c.minute * 60;
+            c.msec += o.sec ? '' : c.sec * 1000;
+        }
+        setTimeout(function () {
+            new countDown(o, t, open);
+        })
+    }
+    for(var i in o){
+        if(c[i] < 10) {
+            c[i] = '0' + c[i];
+        }
+        o[i].innerHTML = c[i];
+    }
+}
