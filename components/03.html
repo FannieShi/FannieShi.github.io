@@ -1,28 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>拖拽组件</title>
-<link rel="stylesheet" href="03.css">
+    <meta charset="UTF-8">
+    <title>拖拽组件</title>
+    <link rel="stylesheet" href="../extend/css/drag.min.css">
 </head>
 <body>
-<div class="login">
-    <h4 class="login-title">登录账号 <span class="login-close">&times;</span></h4>
+<div class="login" id="login">
+    <h4 class="login-title">
+        <span class="logo"></span>
+        登录账号
+        <span class="login-close">&times;</span>
+    </h4>
     <form action="" class="login-form">
-        <div class="input">
+        <div class="login-input userID">
             <input type="text" placeholder="手机/邮箱/用户名">
+            <em class="ico userID-ico"></em>
         </div>
-        <div class="input">
+        <div class="login-input password">
             <input type="password" placeholder="密码">
+            <em class="ico password-ico"></em>
         </div>
-        <p><input type="checkbox" name="auto-login" checked="checked">下次自动登录</p>
-        <div class="submit">
+        <div class="login-checkbox">
+            <label><input type="checkbox" name="auto-login" checked="checked">下次自动登录</label>
+        </div>
+        <div class="login-submit">
             <button type="button">登录</button>
         </div>
     </form>
 </div>
 <script type="text/javascript">
+    (function () {
+        /**
+         * by FannieShi 2017-03-05
+         * http://fannieshi.com/
+         * 拖拽组件
+         * @param o: 触发拖拽对象
+         * @param box: 被拖拽的对象
+         */
+        var drag = function(o, box){
+            o.addEventListener('mousedown', function (e) {
+                var e = e || window.event;
+                var _this = this;
+                var body = document.getElementsByTagName('body')[0];
+                var oWidth = body.offsetWidth > window.innerWidth ? body.offsetWidth : window.innerWidth;
+                var oHeight = body.offsetHeight > window.innerHeight ? body.offsetHeight : window.innerHeight;
+                var diffX = parseInt(css(box,'left')) - e.clientX;
+                var diffY = parseInt(css(box,'top')) - e.clientY;
 
+                document.addEventListener('mousemove', move, false);
+                document.addEventListener('mouseup', up, false);
+
+                function move(e) {
+                    var left = e.clientX + diffX;
+                    var top = e.clientY + diffY;
+                    if(left < 0){
+                        left = 0;
+                    }else if (left > oWidth - box.offsetWidth) {
+                        left = oWidth - box.offsetWidth;
+                    }
+
+                    if(top < 0) {
+                        top = 0;
+                    }else if (top > oHeight - box.offsetHeight ){
+                        top = oHeight - box.offsetHeight;
+                    }
+
+                    box.style.left = left + 'px';
+                    box.style.top = top + 'px';
+
+                    if (typeof _this.setCapture != 'undefined') {
+                        _this.setCapture();
+                    }
+                }
+                function up() {
+                    document.removeEventListener('mousemove', move, false);
+                    document.removeEventListener('mouseup', up, false);
+                    if (typeof _this.releaseCapture != 'undefined') {
+                        _this.releaseCapture();
+                    }
+                }
+            }, false)
+        }
+
+        //获取相关css属性
+        function css(obj, attr){
+            return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, null)[attr];
+        }
+
+        //调用
+        var box = document.querySelector('.login'),
+            obj = document.querySelector('.login-title');
+        drag(obj, box);
+    })();
 </script>
 </body>
 </html>

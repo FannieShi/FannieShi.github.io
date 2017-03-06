@@ -139,3 +139,55 @@ function countDown(o, t, open){
         o[i].innerHTML = c[i];
     }
 }
+
+/**
+ * by FannieShi 2017-03-05
+ * http://fannieshi.com/
+ * 拖拽组件
+ * @param o: 触发拖拽对象
+ * @param box: 被拖拽的对象
+ */
+function drag(o, box){
+    o.addEventListener('mousedown', function (e) {
+        var e = e || window.event;
+        var _this = this;
+        var body = document.getElementsByTagName('body')[0];
+        var oWidth = body.offsetWidth > window.innerWidth ? body.offsetWidth : window.innerWidth;
+        var oHeight = body.offsetHeight > window.innerHeight ? body.offsetHeight : window.innerHeight;
+        var diffX = parseInt(css(box,'left')) - e.clientX;
+        var diffY = parseInt(css(box,'top')) - e.clientY;
+
+        document.addEventListener('mousemove', move, false);
+        document.addEventListener('mouseup', up, false);
+
+        function move(e) {
+            var left = e.clientX + diffX;
+            var top = e.clientY + diffY;
+            if(left < 0){
+                left = 0;
+            }else if (left > oWidth - box.offsetWidth) {
+                left = oWidth - box.offsetWidth;
+            }
+
+            if(top < 0) {
+                top = 0;
+            }else if (top > oHeight - box.offsetHeight ){
+                top = oHeight - box.offsetHeight;
+            }
+
+            box.style.left = left + 'px';
+            box.style.top = top + 'px';
+
+            if (typeof _this.setCapture != 'undefined') {
+                _this.setCapture();
+            }
+        }
+        function up() {
+            document.removeEventListener('mousemove', move, false);
+            document.removeEventListener('mouseup', up, false);
+            if (typeof _this.releaseCapture != 'undefined') {
+                _this.releaseCapture();
+            }
+        }
+    }, false)
+}

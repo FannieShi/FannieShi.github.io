@@ -46,5 +46,6 @@
 ##可复用组件
 * [缓动动画](https://fannieshi.github.io/components/01.html)
 * [倒计时](https://fannieshi.github.io/components/02.html)
+* [拖拽组件](https://fannieshi.github.io/components/03.html)
 
 
