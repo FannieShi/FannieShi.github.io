@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>CSS3绘制八卦</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+        .box {
+            position: relative;
+            display: flex;
+            width: 400px;
+            height: 400px;
+            margin: 30px auto;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+        .l {
+            width: 200px;
+            height: inherit;
+            background-color: #000;
+        }
+        .r {
+            width: 200px;
+            height: inherit;
+            background-color: #fff;
+        }
+        .c {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 200px;
+            height: inherit;
+            margin-left: -100px;
+        }
+        .bc {
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            border: 70px solid #000;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .wc {
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            border: 70px solid #fff;
+            border-radius: 50%;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="l"></div>
+        <div class="r"></div>
+        <div class="c">
+            <div class="bc"></div>
+            <div class="wc"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -42,6 +42,8 @@
 * [文字毛玻璃效果](https://fannieshi.github.io/css/01.html)
 * [文字单行溢出隐藏](https://fannieshi.github.io/css/02.html)
 * [纯CSS实现页面阅读进度条](https://fannieshi.github.io/css/03.html)
+* [CSS绘制八卦](https://fannieshi.github.io/css/04.html)
+* [CSS3绘制小黄人](https://fannieshi.github.io/css/05.html)
 
 ##可复用组件
 * [缓动动画](https://fannieshi.github.io/components/01.html)
