@@ -15,6 +15,8 @@
         }
         .body {
             position: absolute;
+            left: 25px;
+            z-index: 2;
             width: 240px;
             height: 400px;
             border: 5px solid #000;
@@ -147,10 +149,10 @@
             background: #fff;
         }
         .leftEye {
-            left: 28px;
+            left: 53px;
         }
         .rightEye {
-            right: 28px;
+            right: 3px;
         }
         .leftEye:after,
         .rightEye:after {
@@ -215,8 +217,9 @@
         }
         .mouse_shape {
             position: absolute;
-            top: 175px;
-            left: 98px;
+            z-index: 3;
+            top: 170px;
+            left: 122px;
             width: 55px;
             height: 35px;
             border: 5px solid #000;
@@ -243,6 +246,113 @@
             -ms-transform: rotate(34deg);
             -o-transform: rotate(34deg);
             transform: rotate(34deg);
+        }
+        .hands {
+            position: relative;
+        }
+        .leftHand,
+        .rightHand {
+            position: absolute;
+            top: 215px;
+            width: 80px;
+            height: 80px;
+            border: 6px solid #000;
+            border-radius: 25px;
+            background: rgb(249,217,70);
+            -webkit-transform: rotate(40deg);
+            -moz-transform: rotate(40deg);
+            -ms-transform: rotate(40deg);
+            -o-transform: rotate(40deg);
+            transform: rotate(40deg);
+        }
+        .leftHand {
+            left: 5px;
+        }
+        .rightHand {
+            right: 8px;
+        }
+        .leftHand:after,
+        .rightHand:after {
+            content: '';
+            position: absolute;
+            left: 13px;
+            top: 55px;
+            width: 15px;
+            height: 3px;
+            background: #000;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        .rightHand:after {
+            left: 55px;
+            top: 18px;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+        .feet {
+            position: relative;
+        }
+        .left_foot,
+        .right_foot {
+            position: absolute;
+            top: 400px;
+            width: 36px;
+            height: 50px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 9px;
+            background: #000;
+        }
+        .left_foot {
+            left: 110px;
+        }
+        .right_foot {
+            right: 110px;
+            border-bottom-left-radius: 9px;
+            border-bottom-right-radius: 6px;
+        }
+        .left_foot:after,
+        .right_foot:after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            width: 60px;
+            height: 35px;
+            border-radius: 20px 10px 21px 15px;
+            background: #000;
+            -webkit-transform: rotate(5deg);
+            -moz-transform: rotate(5deg);
+            -ms-transform: rotate(5deg);
+            -o-transform: rotate(5deg);
+            transform: rotate(5deg);
+        }
+        .left_foot:after {
+            right: 13px;
+
+        }
+        .right_foot:after {
+            left: 13px;
+            border-radius: 10px 20px 15px 21px;
+            -webkit-transform: rotate(-5deg);
+            -moz-transform: rotate(-5deg);
+            -ms-transform: rotate(-5deg);
+            -o-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+        }
+        .feetShadow {
+            position: relative;
+            top: 448px;
+            left: 50px;
+            width: 200px;
+            height: 2px;
+            border-radius: 50%;
+            box-shadow: 0 0 2px 4px rgba(0,0,0,.3);
+            background: rgba(0,0,0,.3);
         }
     </style>
 </head>
@@ -278,6 +388,15 @@
             <div class="mouse"> <!--嘴巴-->
                 <div class="mouse_shape"></div>
             </div>
+            <div class="hands">
+                <div class="leftHand"></div>
+                <div class="rightHand"></div>
+            </div>
+            <div class="feet"> <!--双脚-->
+                <div class="left_foot"></div>
+                <div class="right_foot"></div>
+            </div>
+            <div class="feetShadow"></div> <!--脚底阴影-->
         </div>
     </div>
 </body>
