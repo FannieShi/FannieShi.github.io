@@ -1,7 +1,7 @@
-# fannieshi.github.io
+# shifan6.github.io
 基于原生JavaScript的练习
 
-在线预览: https://fannieshi.github.io/
+在线预览: https://shifan6.github.io/
 ## 表单常用代码
 * [去除字符串两边的空格](https://fannieshi.github.io/form/01.html)
 * [验证用户是否输入](https://fannieshi.github.io/form/02.html)
